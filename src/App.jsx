@@ -85,13 +85,16 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      <header className="app-header">
-        <h1>Vedant's AI Prompt Chat</h1>
-        <div className="header-actions">
-          {loading && <button onClick={handleStop} className="btn secondary">Stop</button>}
-          <button onClick={handleClear} className="btn danger outline">Clear</button>
-        </div>
-      </header>
+      <div className="header-3d-wrap">
+        <header className="app-header header-3d-plate">
+          <h1>Vedant's AI Prompt Chat</h1>
+          <div className="header-actions">
+            {loading && <button onClick={handleStop} className="btn secondary">Stop</button>}
+            <button onClick={handleClear} className="btn danger outline">Clear</button>
+          </div>
+        </header>
+        <div className="header-3d-divider" aria-hidden></div>
+      </div>
       <main className="chat-area">
         <ChatHistory messages={messages} loading={loading} />
       </main>
