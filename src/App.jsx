@@ -31,16 +31,28 @@ export default function App() {
 
     const controller = new AbortController();
     abortRef.current = controller;
-    try {
-      const res = await fetch('/api/chat', {
+
+    async function callEndpoint(url) {
+      return fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt, history: messages }),
         signal: controller.signal
       });
+    }
+
+    try {
+      let res = await callEndpoint('/api/chat');
+      if (res.status === 404) {
+        // Fallback for static deploys without redirect working
+        console.warn('[chat] /api/chat 404 – attempting direct Netlify function path');
+        res = await callEndpoint('/.netlify/functions/chat');
+      }
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        const detail = [data.error, data.upstreamStatus ? `(upstream ${data.upstreamStatus})` : null].filter(Boolean).join(' ');
+        let data = {};
+        try { data = await res.json(); } catch { /* ignore */ }
+        const detail = [data.error, data.upstreamStatus ? `(upstream ${data.upstreamStatus})` : null, res.status === 404 ? '(/api/chat not found; ensure netlify.toml deployed from repo root)' : null]
+          .filter(Boolean).join(' ');
         throw new Error(detail || `Error ${res.status}`);
       }
       const data = await res.json();
@@ -49,6 +61,7 @@ export default function App() {
       if (e.name === 'AbortError') {
         setError('Request canceled');
       } else {
+        console.error('Chat request failed:', e);
         setError(e.message || 'Unknown error');
         setMessages(prev => prev.filter(m => m.id !== pendingMsg.id));
       }
