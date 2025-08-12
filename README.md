@@ -65,22 +65,3 @@ index.html       Vite entry HTML
 
 ## Customization
 Change the model in `server/index.js` (default: `gpt-4o-mini`). Adjust temperature, max tokens, or add system prompts.
-
-## Deployment
-### Option A: Netlify (serverless)
-Included `netlify.toml` and serverless functions. Steps:
-1. Push repository to GitHub.
-2. In Netlify create a new site from repo.
-3. Set environment variable `OPENAI_API_KEY` in Site settings > Build & deploy > Environment.
-4. Build command: `npm run build`, Publish directory: `dist`.
-5. Deploy. Client calls `/api/chat` which is redirected to `/.netlify/functions/chat`.
-6. Test: visit `/api/diag` on your deployed domain; it should return `{ "hasKey": true }`.
-
-### Option B: Separate Express Server
-Deploy `server/index.js` on Render/Railway/Fly and point frontend fetch to that domain.
-
-### SPA Redirect
-`netlify.toml` includes a catch‑all redirect so deep links resolve to `index.html`.
-
-## License
-MIT
