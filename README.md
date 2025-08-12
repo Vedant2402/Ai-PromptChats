@@ -2,6 +2,16 @@
 
 Lightweight, modern chat interface to send prompts to the OpenAI API with local chat history, error handling, and a clean responsive UI.
 
+## Screenshots -
+<img width="1919" height="868" alt="Screenshot 2025-08-11 210654" src="https://github.com/user-attachments/assets/2d07d1c2-3391-4675-9f17-678d85fd8b87" />
+UI
+
+<img width="1919" height="873" alt="Screenshot 2025-08-11 210559" src="https://github.com/user-attachments/assets/16a91f35-3ee4-417f-b815-b22dfc1ab642" />
+Error Handling & Clear Button
+
+<img width="1919" height="495" alt="Screenshot 2025-08-11 210615" src="https://github.com/user-attachments/assets/56e12552-4320-4f82-bb6b-e040b96416dd" />
+Confirmation
+
 ## Features
 - Prompt input + submit button
 - Fetches responses from OpenAI via a secure Express backend
@@ -55,22 +65,3 @@ index.html       Vite entry HTML
 
 ## Customization
 Change the model in `server/index.js` (default: `gpt-4o-mini`). Adjust temperature, max tokens, or add system prompts.
-
-## Deployment
-### Option A: Netlify (serverless)
-Included `netlify.toml` and serverless functions. Steps:
-1. Push repository to GitHub.
-2. In Netlify create a new site from repo.
-3. Set environment variable `OPENAI_API_KEY` in Site settings > Build & deploy > Environment.
-4. Build command: `npm run build`, Publish directory: `dist`.
-5. Deploy. Client calls `/api/chat` which is redirected to `/.netlify/functions/chat`.
-6. Test: visit `/api/diag` on your deployed domain; it should return `{ "hasKey": true }`.
-
-### Option B: Separate Express Server
-Deploy `server/index.js` on Render/Railway/Fly and point frontend fetch to that domain.
-
-### SPA Redirect
-`netlify.toml` includes a catch‑all redirect so deep links resolve to `index.html`.
-
-## License
-MIT
