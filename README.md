@@ -2,6 +2,8 @@
 
 Lightweight, modern chat interface to send prompts to the OpenAI API with local chat history, error handling, and a clean responsive UI.
 
+## Youtube preview - https://youtu.be/-xI6YTwp9lc?si=h1-m0Y2XwKSvC9Nh
+
 ## Screenshots -
 <img width="1919" height="868" alt="Screenshot 2025-08-11 210654" src="https://github.com/user-attachments/assets/2d07d1c2-3391-4675-9f17-678d85fd8b87" />
 UI
